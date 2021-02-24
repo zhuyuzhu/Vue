@@ -5,7 +5,7 @@
   <script src="./js/vue.js"></script>
 </head>
 <body>
-  <div id="app" v-bind:title="date">
+  <div id="app" v-bind:title="date" v-cloak>
     <span>{{ message }}</span>
     <span v-if="isShow">v-if显示</span>
     <span v-show="!isShow">v-show显示</span>
@@ -15,6 +15,8 @@
     <ul v-for="(item, index) in nums" v-bind:key="item.id" >
       <li>{{item.num}}</li>
     </ul>
+
+    <div v-once>{{message}}</div>
   </div>
 
   <script>

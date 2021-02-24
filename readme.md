@@ -10,7 +10,7 @@ Vue官方文档：https://cn.vuejs.org/v2/guide/installation.html
 
 ### 基础知识——2021.2.24弄懂基础知识
 
-1、模板语法
+**1、模板语法**
 
 ```html
 <div id="app">
@@ -18,13 +18,13 @@ Vue官方文档：https://cn.vuejs.org/v2/guide/installation.html
 </div>
 ```
 
-2、指令
+**2、指令**
 
 https://m.php.cn/vuejs/464673.html
 
 https://www.jianshu.com/p/c4a87e1b4ef7
 
-**v-text、v-html**
+**（1）v-text、v-html**
 
 v-text修改元素标签的text文本，优先级高于模板语法
 
@@ -32,19 +32,19 @@ v-html 修改元素的innerhtml
 
 
 
-**v-if、v-else、v-else-if**
+**（2）v-if、v-else、v-else-if**
 
 如果属性值为true，则显示。否则，不会渲染这个元素。
 
 v-else是搭配v-if使用的，它必须紧跟在v-if或者v-else-if后面，否则不起作用。
 
-**v-show**
+**（3）v-show**
 
 如果要非常频繁的切换，则使用v-show较好
 
 
 
-**v-for、v-bind:key**
+**（4）v-for、v-bind:key**
 
 
 
@@ -64,13 +64,13 @@ v-else是搭配v-if使用的，它必须紧跟在v-if或者v-else-if后面，否
         }]
 ```
 
-
+https://blog.csdn.net/zyz00000000/article/details/83657831
 
 问：v-for中为什么要加key
 
 答：跟虚拟DOM的diff算法有关
 
-v-on
+**v-on**
 
 监听事件
 
@@ -83,11 +83,11 @@ v-on
 <button v-on="{mouseenter:onenter,mouseleave:leave}">click me</button>
 ```
 
+https://blog.csdn.net/zyz00000000/article/details/83753708
 
 
 
-
-**v-bind**
+**v-bind:attribute**
 
 相关文章：https://segmentfault.com/a/1190000022126326
 
@@ -111,6 +111,14 @@ v-bind:href——a标签的href属性
 
 v-bind:src——img标签的src属性
 
+https://cn.vuejs.org/v2/guide/syntax.html#Attribute
+
+```html
+<button v-bind:disabled="isButtonDisabled">Button</button>
+```
+
+
+
 v-pre 不进行编译，渲染出来是不经过vue处理的html结构
 
 ```html
@@ -125,15 +133,29 @@ v-cloak
 
 这个指令是用来保持在元素上直到关联实例结束时进行编译
 
+v-cloak指令防止页面未加载完成导致出现｛{name}}等变量
 
 
 
+**v-model**
 
-5、v-model 表单输入和应用状态之间的双向绑定。
+ 表单输入和应用状态之间的双向绑定。
 
-6、v-once
+https://blog.csdn.net/zyz00000000/article/details/83786768
+
+
+
+**v-once**
 
 自定义指令：https://cn.vuejs.org/v2/guide/custom-directive.html
+
+如果显示的信息后续不需要再修改，使用v-once，这样可以提高性能。
+
+只渲染一次，后续改动数据也不会根据数据进行变动
+
+
+
+
 
 
 
@@ -142,8 +164,6 @@ Vuex
 https://vuex.vuejs.org/zh/
 
 
-
-- 
 
 
 
