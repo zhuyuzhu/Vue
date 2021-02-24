@@ -119,7 +119,9 @@ https://cn.vuejs.org/v2/guide/syntax.html#Attribute
 
 
 
-v-pre 不进行编译，渲染出来是不经过vue处理的html结构
+**v-pre** 
+
+不进行编译，渲染出来是不经过vue处理的html结构
 
 ```html
 <span v-text="text"  v-on:click="clickHandle" v-pre>{{message}}</span>
@@ -129,7 +131,7 @@ v-pre 不进行编译，渲染出来是不经过vue处理的html结构
 
 v-pre主要用来跳过这个元素和它的子元素编译过程。可以用来显示原始的Mustache标签。跳过大量没有指令的节点加快编译。
 
-v-cloak
+**v-cloak**
 
 这个指令是用来保持在元素上直到关联实例结束时进行编译
 
@@ -160,6 +162,8 @@ https://blog.csdn.net/zyz00000000/article/details/83786768
 
 
 Vuex
+
+Vuex 是专门为 Vue.js 设计的状态管理库，以利用 Vue.js 的细粒度数据响应机制来进行高效的状态更新。
 
 https://vuex.vuejs.org/zh/
 
