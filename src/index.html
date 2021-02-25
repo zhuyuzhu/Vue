@@ -6,7 +6,7 @@
 </head>
 <body>
   <div id="app" v-bind:title="date" v-cloak>
-    <span>{{ message }}</span>
+    <span>{{ message+"@" }}</span>
     <span v-if="isShow">v-if显示</span>
     <span v-show="!isShow">v-show显示</span>
     <span v-text="text"  v-on:click="clickHandle" v-pre>{{message}}</span>

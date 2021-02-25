@@ -24,6 +24,42 @@ https://m.php.cn/vuejs/464673.html
 
 https://www.jianshu.com/p/c4a87e1b4ef7
 
+Mustache 语法不能作用在 HTML attribute 上，遇到这种情况应该使用 [`v-bind` 指令](https://cn.vuejs.org/v2/api/#v-bind)：
+
+```html
+<div v-bind:id="dynamicId"></div>
+```
+
+对于布尔 attribute (它们只要存在就意味着值为 `true`)，`v-bind` 工作起来略有不同，在这个例子中：
+
+```html
+<button v-bind:disabled="isButtonDisabled">Button</button>
+```
+
+如果 `isButtonDisabled` 的值是 `null`、`undefined` 或 `false`，则 `disabled` attribute 甚至不会被包含在渲染出来的 `<button>` 元素中。
+
+
+
+**支持表达式**
+
+不管是在模板语法中，还是在指令中，都支持表达式
+
+```js
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
+
+<div v-bind:id="'list-' + id"></div>
+```
+
+
+
+
+
+
+
 **（1）v-text、v-html**
 
 v-text修改元素标签的text文本，优先级高于模板语法
@@ -189,23 +225,56 @@ Vue的核心内容，大致明白其原理
 
 Vue是响应式的，核心库只关注视图层，数据和 DOM建立联系。不再通过js来控制html元素，而是通过Vue来将数据和逻辑挂载到DOM元素上，对其进行完全控制。
 
-如下：
+#### Vue的响应式
 
-（1）html文本展示——模板语法
+当一个 Vue 实例被创建时，它将 `data` 对象中的所有的 property 加入到 Vue 的**响应式系统**中。当这些 property 的值发生改变时，视图将会产生“响应”，即匹配更新为新的值。
 
-（2）v-bind
+只有Vue被创建时的data中的数据才会添加到响应式系统中，所以后续添加到Vue实例对象上的变量是不具有响应式的。
 
-- v-bind:title="message"
-- v-bind:class和v-bind:style
-- 
+可以使用 `Object.freeze()`，这会阻止修改现有的 property，也意味着响应系统无法再*追踪*变化。
 
-（3）v-if和v-show的区别
-
-等等。。。
+了解object.freeze() ：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
 
 
 
-需要了解new Vue () 返回的对象是什么
+指令 (Directives) 是带有 `v-` 前缀的特殊 attribute。指令 attribute 的值预期是**单个 JavaScript 表达式** (`v-for` 是例外情况，稍后我们再讨论)。指令的职责是，当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM。
+
+实例：
+
+```html
+<p v-if="seen">现在你看到我了</p>
+```
+
+这里，`v-if` 指令将根据表达式 `seen` 的值的真假来插入/移除 `<p>` 元素。
+
+
+
+**动态绑定指令**
+
+当 `eventName` 的值为 `"focus"` 时，`v-on:[eventName]` 将等价于 `v-on:focus`。
+
+如果你的 Vue 实例有一个 `data` property `attributeName`，其值为 `"href"`，那么这个绑定将等价于 `v-bind:href`。
+
+```html
+<a v-bind:[attributeName]="url"> ... </a>
+
+<a v-on:[eventName]="doSomething"> ... </a>
+```
+
+动态指令参数预期会求出一个字符串，异常情况下值为 `null`。这个特殊的 `null` 值可以被显性地用于移除绑定。任何其它非字符串类型的值都将会触发一个警告。
+
+不合法的警告：
+
+```html
+<!-- 这会触发一个编译警告 -->
+<a v-bind:['foo' + bar]="value"> ... </a>
+```
+
+
+
+#### 需要了解new Vue () 返回的对象是什么
+
+除了数据 property，Vue 实例还暴露了一些有用的实例 property 与方法。它们都有前缀 `$`，以便与用户定义的 property 区分开来。
 
 
 
