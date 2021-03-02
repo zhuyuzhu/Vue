@@ -8,6 +8,8 @@ Vue官方文档：https://cn.vuejs.org/v2/guide/installation.html
 
 
 
+
+
 ### 基础知识——2021.2.24弄懂基础知识
 
 **1、模板语法**
@@ -244,11 +246,66 @@ https://blog.csdn.net/zyz00000000/article/details/83786768
 
 
 
-### 计算属性
+### 计算属性和侦听属性
 
 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。所以，对于任何复杂逻辑，你都应当使用**计算属性**
 
+计算属性，计算属性值的变化（vue实例的data对象的属性值），如果vue实例的data对象的属性值发生变化，就会执行函数重新计算。
+
+计算属性，在vue实例初始化时，会默认根据计算的属性去执行getter方法，从而得到计算属性值。
+
 计算属性是依据他们的响应式依赖进行缓存的，该属性值就缓存在内存中。
+
+计算属性默认是getter函数，所以处理函数要有return来返回值，赋值给计算属性。
+
+当然也可以写成getter和setter的模式，setter函数在程序主动给计算属性设置时触发——此处有点类似侦听属性
+
+```js
+      computed: {
+        personAge: function(){
+          return this.firstName + '25';
+        },
+        personHobby: {
+          get(){
+            return this.fullName + 'travel'
+          },
+          set(){//可接受参数
+            this.travelCount ++;
+            console.log(this.travelCount)
+          }
+        }
+      },
+```
+
+
+
+
+
+**侦听属性**
+
+侦听属性值的变化（vue实例的data对象的属性值），就会触发函数。
+
+侦听函数的参数val就是侦听属性本身的新值。
+
+vue实例初始化时，不会根据data对象的值而触发侦听器。触发在程序中主动改变侦听属性。
+
+```js
+      watch: { // 如果 侦听的值发生改变，这个函数就会运行
+        firstName: function (val) {
+          console.log(val);
+          this.fullName = val + ' ' + this.lastName
+        },
+        lastName: function (val) {
+          this.fullName = this.firstName + ' ' + val
+        }
+      }
+```
+
+
+
+方法
+
+
 
 
 

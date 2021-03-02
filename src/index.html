@@ -7,27 +7,23 @@
 </head>
 
 <body>
-  <div id="app" v-bind:title="fullName" v-cloak>
-    <span>{{ firstName+"@" }}
+  <div id="components-demo">
+    <button-counter></button-counter>
   </div>
-
   <script>
-    var vm = new Vue({
-      el: '#app',
-      data: {
-        firstName: 'Foo',
-        lastName: 'Bar',
-        fullName: 'Foo Bar'
-      },
-      watch: { // 如果 侦听的值发生改变，这个函数就会运行
-        firstName: function (val) {
-          this.fullName = val + ' ' + this.lastName
-        },
-        lastName: function (val) {
-          this.fullName = this.firstName + ' ' + val
+    // 定义一个名为 button-counter 的新组件
+    Vue.component('button-counter', {
+      data: function () {
+        return {
+          count: 0
         }
-      }
+      },
+      template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
     })
+    new Vue({
+      el: '#components-demo'
+    })
+
   </script>
 </body>
 
