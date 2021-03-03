@@ -1,4 +1,4 @@
-# 计算属性computed、侦听属性watch
+# 计算属性computed、侦听属性watch、方法methods
 
 属性指vue实例中data对象内的属性
 
@@ -58,3 +58,12 @@ vue实例初始化时，不会根据data对象的值而触发侦听器。触发�
 
 
 
+### 方法methods
+
+（1）v-on监听事件
+
+监听的事件处理函数，在methods对象中，处理函数的写法为`v-on:click="clickHandle()"`，如果不接收参数可以简写为`v-on:click="clickHandle"`
+
+
+
+（2）普通方法调用，每次调用都重新执行，因为与计算属性的缓存有区别

@@ -1,4 +1,14 @@
-# 数据data和方法methods
+# Vue响应式数据data
+
+### Vue响应式
+
+不管是Vue实例中，还是在组件中，初始化Vue实例前存在的原始值都具有响应式，其原理是：Vue实例初始化时，对每个变量添加getter和setter方法。
+
+原始值变量直接添加getter和setter方法。
+
+引用值变量，先给引用值变量本身添加getter和setter方法，再遍历给对象内每个属性也添加getter和setter方法。所以对象指向新的地址，是重新给新地址中的每个属性添加getter和setter方法。如果是给该对象内再添加新的属性时，该属性不添加getter和setter方法，且不具有响应式。
+
+
 
 ### 数据data
 
@@ -114,14 +124,4 @@ new Vue({
 这个方法返回传递的对象，而不是创建一个被冻结的副本。
 
 
-
-### 方法methods
-
-（1）v-on监听事件
-
-监听的事件处理函数，在methods对象中，处理函数的写法为`v-on:click="clickHandle()"`，如果不接收参数可以简写为`v-on:click="clickHandle"`
-
-
-
-（2）普通方法调用，每次调用都重新执行，因为与计算属性的缓存有区别
 

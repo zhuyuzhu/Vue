@@ -14,6 +14,8 @@ Vue官方文档：https://cn.vuejs.org/v2/guide/installation.html
 
 **1、模板语法**
 
+**注意**：可以以字符串对象或字符串数组的形式在页面上展示
+
 ```html
 <div id="app">
   {{ message }}
@@ -525,3 +527,6 @@ http://www.mamicode.com/info-detail-3059000.html
 
 
 
+XSS攻击
+
+https://en.wikipedia.org/wiki/Cross-site_scripting
