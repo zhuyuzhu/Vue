@@ -8,47 +8,26 @@
 
 <body>
   <div id="app">
-    <span>{{msg}}</span>
-    <blog-post post-title="hello!"></blog-post>
+    <blog-post prop-c="hello!" >
+      <div>
+        <span>{{msg.name}}{{age}}</span>
+        <span>2</span>
+      </div>
+    </blog-post>
   </div>
   <script>
-    var a = 111;
-    var blogA = {
-      props: ['name'],
-      data() {
+    Vue.component('blog-post', {
+      data (){
         return {
-          nameText: this.name
-        }
-      },
-      methods: {
-        addCount() {
-          this.nameText = {a: a}
-          
-          console.log(a++)
+          age: 24
         }
       },
       template: `<div>
-        <a href="www.baidu.com">百度一下{{nameText}}{{name}}</a>
-        <span v-on:click="addCount">111</span>
+        <span>0</span>
+        <slot>插槽接收自定义标签的内容</slot>
         </div>`
-    }
-    Vue.component('blog-post', {
-      props: ['postTitle'],
-      data(){
-        return {
-          name: {
-            firstName: 'zhu'
-          }
-        }
-      },
-      components: {
-        'blog-a': blogA
-      },
-      template: `<h3>
-        <span>{{name}}</span>
-        <blog-a v-bind:name="name"></blog-a>
-        </h3>`
     })
+
     var vm = new Vue({
       el: '#app',
       data: {
@@ -58,10 +37,6 @@
       }
     })
 
-
-    var reg = /\"zhu\"/ 
-    var str = '"zhu"'
-    console.log(str.match(reg))
   </script>
 </body>
 
