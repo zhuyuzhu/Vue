@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>My first Vue app</title>
   <script src="./js/vue.js"></script>
 </head>
+
 <body>
-  <div id="app" v-bind:title="date" v-cloak>
-    <span>{{ message+"@" }}</span>
-    <span v-if="isShow">v-if显示</span>
-    <span v-show="!isShow">v-show显示</span>
-    <span v-text="text"  v-on:click="clickHandle" v-pre>{{message}}</span>
-    <span v-html="innerhtml"></span>
-
-    <ul v-for="(item, index) in nums" v-bind:key="item.id" >
-      <li>{{item.num}}</li>
-    </ul>
-
-    <div v-once>{{message}}</div>
+  <div id="app">
+    <blog-post prop-c="hello!" >
+      <div>
+        <span>{{msg.name}}{{age}}</span>
+        <span>2</span>
+      </div>
+    </blog-post>
   </div>
-
   <script>
-    var app = new Vue({
+    Vue.component('blog-post', {
+      data (){
+        return {
+          age: 24
+        }
+      },
+      template: `<div>
+        <span>0</span>
+        <slot>插槽接收自定义标签的内容</slot>
+        </div>`
+    })
+
+    var vm = new Vue({
       el: '#app',
       data: {
-        message: 'Hello Vue!',
-        date: new Date(),
-        isShow: false,
-        text: "文本",
-        innerhtml: `<a href="www.bai.com">百度一下</a>`,
-        nums: [{
-          id: 1,
-          num: 10
-        },{
-          id: 2,
-          num: 20
-        }]
-      },
-      methods: {
-        clickHandle() {
-          console.log("111")
+        msg: {
+          name: 'zhuyuzhu'
         }
       }
     })
-    console.log(app);
+
   </script>
 </body>
+
 </html>
