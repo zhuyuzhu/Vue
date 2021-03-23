@@ -4,30 +4,28 @@
 <head>
   <title>My first Vue app</title>
   <script src="./js/vue.js"></script>
-  <script src="./language.js"></script>
 </head>
 
 <body>
   <div id="app">
-    <blog-post prop-c="hello!" >
-      <div>
-        <span>{{msg.name}}</span>
-        <span>2</span>
-      </div>
-    </blog-post>
+    <current-user>
+      <template slot-scope="slotProps">
+        {{ slotProps.age }}
+      </template>
+    </current-user>
   </div>
-  <span id="ipDom">1111111111</span>
   <script>
-    Vue.component('blog-post', {
-      data (){
+    Vue.component('current-user', {
+      data() {
         return {
           age: 24
         }
       },
-      template: `<div>
-        <span>0</span>
-        <slot>插槽接收自定义标签的内容</slot>
-        </div>`
+      template: `<span>
+                  <slot v-bind:age="age">
+                   {{ age }}
+                  </slot>
+                </span>`
     })
 
     var vm = new Vue({
@@ -38,41 +36,7 @@
         }
       }
     })
-
-//匹配所有的中文符号
-var zhSymbolsReg = `\(\\u3002\|\\uFF1F\|\\uFF01\|\\uFF0C\|\\u3001\|\\uFF1B\|\\uFF1A\|\\u300C\|\\u300D\|\\u300E\|\\u300F\|\\u2018
-    \|\\u2019\|\\u201C\|\\u201D\|\\uFF08\|\\uFF09\|\\u3014\|\\u3015\|\\u3010\|\\u3011\|\\u2014\|\\u2026\|\\u2013\|\\uFF0E\|\\u300A
-    \|\\u300B\|\\u3008\|\\u3009\|\\\.\\\.\\\.)`
-
-//匹配中文语句，包括中文符号
-var regzhSymbolsReg = new RegExp('\"\('+ zhSymbolsReg +'\*\[\\u4E00\-\\u9FA5]\+'+zhSymbolsReg+'\*\)\+\"\|\'\('+ zhSymbolsReg +'\*\[\\u4E00\-\\u9FA5]\+'+zhSymbolsReg+'\*\)\+\'', 'g')
-
-var str = '"day":,"desc":"的会议加载出错，请联系管理员..."'
-
-
-
-//注意此匹配需要额外匹配双引号中的单引号，单引号中的双引号
-var yinhaoZh_CN = /"((\.|\w| |”|“|……|【|】|？|，|。|、|！|：|；|）|（|~|\?|!|\-|\)|\(|,|:|\&nbsp;|\+|\*|&|%|\$|#|@|\.\.\.|\')*[\u4E00-\u9FA5]+(\.|\w| |”|“|……|【|】|？|，|。|、|！|：|；|）|（|~|\?|!|\-|\)|\(|,|:|\&nbsp;|\+|\*|&|%|\$|#|@|\.\.\.|\')*)+"|'((\.|\w| |”|“|……|【|】|？|，|。|、|！|：|；|）|（|~|\?|!|\-|\)|\(|,|:|\&nbsp;|\+|\*|&|%|\$|#|@|\.\.\.|\")*[\u4E00-\u9FA5]+(\.|\w| |”|“|……|【|】|？|，|。|、|！|：|；|）|（|~|\?|!|\-|\)|\(|,|:|\&nbsp;|\+|\*|&|%|\$|#|@|\.\.\.|\")*)+'/g
-
-var regJspElement = /\>((\.|\w|\s|”|“|……|【|】|？|，|。|、|！|：|；|）|（|~|\?|\.|!|\-|\)|\(|\,|:|\&nbsp;|\+|\*|&|%|\$|#|@|\.\.\.)*[\u4E00-\u9FA5]+(\.|\w|\s|”|“|……|【|】|？|，|。|、|！|：|；|）|（|~|\?|\.|!|\-|\)|\(|\,|:|\&nbsp;|\+|\*|&|%|\$|#|@|\.\.\.)*)+\</g
-
-var elemTag = /\<\6(\.|\w|\s|'|"|:|;|%|=|\-|#|\/|\$|\}|\{|\)|\()*\>(((\.|\w|\s|”|“|……|【|】|？|，|。|、|！|：|；|）|（|~|\?|!|\-|\)|\(|,|:|\&nbsp;|\+|\*|&|%|\$|#|@|\.\.\.|\/|\")*[\u4E00-\u9FA5]+(\.|\w|\s|”|“|……|【|】|？|，|。|、|！|：|；|）|（|~|\?|!|\-|\)|\(|,|:|\&nbsp;|\+|\*|&|%|\$|#|@|\.\.\.|\/|\")*)+)\<\/(\w+)\>/g;
-
-var s = `'正在加载，请稍候...'`
-
-console.log(s.match(yinhaoZh_CN))
-
-
-console.log('moooo-sso-portal\webapp\WEB-INF\jsps\resetpassword\resetpassword.jsp'.search(/eetingCountPanel\.js/))
-
-var ip = '0.0.0.0'
-var str = `'正在加载，请稍候...'`
-
-
-document.addEventListener('click', function(){
-  ipDom.outerHTML = str;
-})
-</script>
+  </script>
 </body>
 
 </html>

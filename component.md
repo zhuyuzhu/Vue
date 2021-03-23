@@ -2,6 +2,18 @@
 
 组件是可复用的 Vue 实例，且带有一个名字。因为组件是可复用的 Vue 实例，所以它们与 `new Vue` 接收相同的选项，例如 `data`、`computed`、`watch`、`methods` 以及生命周期钩子等。仅有的例外是像 `el` 这样根实例特有的选项。
 
+**一个组件的 `data` 选项必须是一个函数**，因此每个实例可以维护一份被返回对象的独立的拷贝
+
+组件名：
+
+强烈推荐遵循 [W3C 规范](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name)中的自定义组件名 (字母全小写且必须包含一个连字符)。这会帮助你避免和当前以及未来的 HTML 元素相冲突。
+
+https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name
+
+ kebab-case（短横线隔开）  和 PascalCase（帕斯卡命名法，首字母大写命名）
+
+
+
 ### 创建组件
 
 我们可以在一个通过 `new Vue` 创建的 Vue 根实例中，把这个组件`<button-counter>`作为自定义元素来使用：
@@ -73,7 +85,7 @@ Vue.component('my-component-name', {
 
 ##### 局部组件
 
-全局注册往往是不够理想的。比如，如果你使用一个像 webpack 这样的构建系统，全局注册所有的组件意味着即便你已经不再使用一个组件了，它仍然会被包含在你最终的构建结果中。这造成了用户下载的 JavaScript 的无谓的增加。
+全局注册往往是不够理想的。比如，如果你使用一个像 webpack 这样的构建系统，全局注册所有的组件意味着即便你已经不再使用一个组件了，它仍然会被包含在你最终的构建结果中。这造成了用户下载的 JavaScript 的无谓的增加。**——？？？**
 
 通过一个普通的 JavaScript 对象来定义组件：**——局部组件是一个js对象**
 
@@ -225,11 +237,13 @@ export default {
 </BaseButton>
 ```
 
-以上遇到的问题，我们可以通过webpack的`require.context`来全局注册这些非常通用的基础组件
+以上遇到的问题，我们可以通过webpack的`require.context`来全局注册这些非常通用的基础组件**——webpack来全局注册通用的基础组件**
 
 
 
-这里有一份可以让你在应用入口文件 (比如 `src/main.js`) 中全局导入基础组件的示例代码：
+这里有一份可以让你在应用入口文件 (比如 `src/main.js`) 中全局导入基础组件的示例代码：**——应用入口**
+
+Lodash 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单
 
 ```js
 import Vue from 'vue'

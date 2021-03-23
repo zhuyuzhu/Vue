@@ -4,7 +4,9 @@ https://cn.vuejs.org/v2/guide/components-props.html
 
 ### Prop写法
 
-HTML 中的 attribute 名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名：
+HTML 中的 attribute 名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名：**——标签、标签属性都是大小写不敏感的，而属性值是敏感的，比如：class="className"**
+
+
 
 ```html
 Vue.component('blog-post', {
@@ -30,7 +32,7 @@ Vue.component('blog-post', {
 <blog-post posttitle="hello!"></blog-post>
 ```
 
-由于组件都会经过vue解析，vue最想接受一个`postTitle`，次想接收一个`posttitle`。但标签的attribute会被浏览器解析为小写的，所以无法传入驼峰写法。但是我们可以传入一个kebab-case (短横线分隔命名) ，让vue经过处理为驼峰写法。
+由于组件都会经过vue解析，vue最想接受一个`postTitle`，次想接收一个`posttitle`。但标签的attribute会被浏览器解析为小写的，所以无法传入驼峰写法。但是我们可以传入一个kebab-case (短横线分隔命名) ，让vue经过处理为驼峰写法。**——Vue的特殊处理，将标签上的短横线与组件的props的小驼峰对应**
 
 
 
@@ -106,9 +108,7 @@ props: {
 <blog-post title="My journey with Vue"></blog-post>
 ```
 
-**动态Prop**
-
-通过 `v-bind` 动态赋值
+**动态Prop**——**通过 `v-bind` 动态赋值**
 
 ```html
 <!-- 动态赋予一个变量的值 -->
