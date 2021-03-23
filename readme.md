@@ -82,7 +82,7 @@ v-else是搭配v-if使用的，它必须紧跟在v-if或者v-else-if后面，否
 
 如果要非常频繁的切换，则使用v-show较好
 
-
+https://cn.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show
 
 **（4）v-for、v-bind:key**
 
