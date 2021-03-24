@@ -98,7 +98,7 @@ props: {
 
 
 
-**传递静态或动态Prop**
+### 传递静态或动态Prop
 
 实际上*任何*类型的值都可以传给一个 prop。
 
@@ -419,7 +419,7 @@ Vue.component('my-component', {
   </script>
 ```
 
-
+type、required、default、
 
 **prop可验证的数据类型**
 
@@ -475,6 +475,32 @@ Vue.component('blog-post', {
 
 然后这个 `data-date-picker="activated"` attribute 就会自动添加到 `<bootstrap-date-input>` 的根元素上。
 
+实例：
+
+```html
+<div id="app">
+    <my-comp data-title="learn vue" class="mycls" style="color:red;"></my-comp>
+</div>
+<script>
+    Vue.component('my-comp', {
+        template: '<div>我是组件</div>'
+    });
+    new Vue({
+        el: '#app'
+    });
+</script>
+```
+
+结果 ：data-title，class，style就是非prop属性，无需定义相应的prop，这些属性都会被添加到组件的根元素上。
+
+```html
+  <div id="app">
+    <div data-title="learn vue" class="mycls" style="color: red;">我是组件</div>
+  </div>
+```
+
+
+
 
 
 **替换/合并已有的 Attribute**
@@ -499,7 +525,7 @@ Vue.component('blog-post', {
 - `form-control`，这是在组件的模板内设置好的
 - `date-picker-theme-dark`，这是从组件的父级传入的
 
-对于绝大多数 attribute 来说，从外部提供给组件的值会替换掉组件内部设置好的值。所以如果传入 `type="text"` 就会替换掉 `type="date"` 并把它破坏！庆幸的是，`class` 和 `style` attribute 会稍微智能一些，即两边的值会被合并起来，从而得到最终的值：`form-control date-picker-theme-dark`。
+**对于绝大多数 attribute 来说，从外部提供给组件的值会替换掉组件内部设置好的值。所以如果传入 `type="text"` 就会替换掉 `type="date"` 并把它破坏！庆幸的是，`class` 和 `style` attribute 会稍微智能一些，即两边的值会被合并起来，从而得到最终的值：`form-control date-picker-theme-dark`。**
 
 
 
@@ -523,7 +549,11 @@ Vue.component('my-component', {
 }
 ```
 
-有了 `inheritAttrs: false` 和 `$attrs`，你就可以手动决定这些 attribute 会被赋予哪个元素。在撰写[基础组件](https://cn.vuejs.org/v2/style-guide/#基础组件名-强烈推荐)的时候是常会用到的：
+有了 `inheritAttrs: false` 和 `$attrs`，你就可以手动决定这些 attribute 会被赋予哪个元素。
+
+**——$attrs：包含了父作用域中不作为 prop 被识别 (且获取) 的 attribute 绑定 (`class`和 `style`除外)。**
+
+在撰写[基础组件](https://cn.vuejs.org/v2/style-guide/#基础组件名-强烈推荐)的时候是常会用到的：
 
 ```js
 Vue.component('base-input', {
@@ -542,7 +572,7 @@ Vue.component('base-input', {
 })
 ```
 
-注意 `inheritAttrs: false` 选项**不会**影响 `style` 和 `class` 的绑定。
+注意 `inheritAttrs: false` 选项**不会**影响 `style` 和 `class` 的绑定。**——不影响style和class绑定到根元素上。**
 
 这个模式允许你在使用基础组件的时候更像是使用原始的 HTML 元素，而不会担心哪个元素是真正的根元素：
 
@@ -553,3 +583,45 @@ Vue.component('base-input', {
   placeholder="Enter your username"
 ></base-input>
 ```
+
+
+
+实例：
+
+```html
+<div id="container">
+  <base-input v-model="username" class="aaa" required placeholder="Enter your username"></base-input>
+</div>
+
+<script>
+  Vue.component('base-input', {
+    inheritAttrs: false,
+    props: ['label', 'value'],
+    template: `<label>
+            {{ label }}
+            <input
+            v-bind="$attrs"
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+            >
+          </label>`
+  })
+  var vm = new Vue({
+    el: '#container',
+    data: {
+      username: 'zhuyuzhu'
+    }
+  })
+</script>
+```
+
+渲染结果：
+
+```html
+<div id="container">
+  <label class="aaa">
+    <input required="required" placeholder="Enter your username">
+  </label>
+</div>
+```
+

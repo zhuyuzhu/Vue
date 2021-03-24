@@ -6,37 +6,34 @@
   <script src="./js/vue.js"></script>
 </head>
 
-<body>
-  <div id="app">
-    <current-user>
-      <template slot-scope="slotProps">
-        {{ slotProps.age }}
-      </template>
-    </current-user>
-  </div>
-  <script>
-    Vue.component('current-user', {
-      data() {
-        return {
-          age: 24
-        }
-      },
-      template: `<span>
-                  <slot v-bind:age="age">
-                   {{ age }}
-                  </slot>
-                </span>`
-    })
-
-    var vm = new Vue({
-      el: '#app',
-      data: {
-        msg: {
-          name: 'zhuyuzhu'
-        }
+<div id="app">
+  <ul>
+    <li
+      v-for="todo in filteredTodos"
+      v-bind:key="todo.id"
+    >
+      {{ todo.text }}
+    </li>
+  </ul>
+</div>
+<script>
+  Vue.component('named-slot', {
+    data() {
+      return {
+        msg: 'yu'
       }
-    })
-  </script>
+    },
+    template: `<div class="container">
+                <slot v-bind:msg="msg"></slot>
+              </div>`
+  })
+  var vm = new Vue({
+    el:'#app',
+    data: {
+      name: 'zhu'
+    }
+  })
+</script>
 </body>
 
 </html>
