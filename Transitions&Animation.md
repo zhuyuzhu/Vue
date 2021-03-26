@@ -11,6 +11,15 @@ Vue 在插入、更新或者移除 DOM 时，提供多种不同方式的应用�
 
 在这里，我们只会讲到进入、离开和列表的过渡，你也可以看下一节的[管理过渡状态](https://cn.vuejs.org/v2/guide/transitioning-state.html)。
 
+### CSS3 transition
+
+transition 属性设置元素当过渡效果，四个简写属性为：
+
+- transition-property：指定CSS属性的name，transition效果
+- transition-duration  ：transition效果需要指定多少秒或毫秒才能完成
+- transition-timing-function：指定transition效果的转速曲线
+- transition-delay：定义transition效果开始的时候
+
 
 
 ### transition组件
@@ -104,6 +113,8 @@ new Vue({
 
 CSS 动画用法同 CSS 过渡，区别是在动画中 `v-enter` 类名在节点插入 DOM 后不会立即删除，而是在 `animationend` 事件触发时删除。
 
+`@keyframes`定义动画名字
+
 ```css
 .bounce-enter-active {
   animation: bounce-in .5s;
@@ -124,7 +135,7 @@ CSS 动画用法同 CSS 过渡，区别是在动画中 `v-enter` 类名在节点
 }
 ```
 
-#### 自定义过渡类名
+#### 自定义过渡类名——上面的类名比较死板，可以自定义类名，实现上面 6个CSS类
 
 我们可以通过以下 attribute 来自定义过渡类名：
 
@@ -158,7 +169,7 @@ CSS 动画用法同 CSS 过渡，区别是在动画中 `v-enter` 类名在节点
 
 
 
-#### 同时使用过渡和动画
+#### 同时使用过渡和动画——transitionend和animationend事件
 
 Vue 为了知道过渡的完成，必须设置相应的事件监听器。它可以是 `transitionend` 或 `animationend`，这取决于给元素应用的 CSS 规则。如果你使用其中任何一种，Vue 能自动识别类型并设置监听。
 

@@ -1,97 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Vue Component Blog Post Example</title>
-    <script src="https://unpkg.com/vue"></script>
-    <link rel="stylesheet" type="text/css" href="/style.css" />
-  </head>
-  <body>
-    <div id="dynamic-component-demo">
-      <button
-        v-for="tab in tabs"
-        v-bind:key="tab"
-        v-bind:class="['tab-button', { active: currentTab === tab }]"
-        v-on:click="currentTab = tab"
-      >
-        {{ tab }}
-      </button>
 
-      <keep-alive>
-        <component v-bind:is="currentTabComponent" class="tab"></component>
-      </keep-alive>
-    </div>
+<head>
+  <title>Vue Component Blog Post Example</title>
+  <script src="./js/vue.js"></script>
+</head>
 
-    <script>
-      Vue.component("tab-posts", {
-        data: function() {
-          return {
-            posts: [
-              {
-                id: 1,
-                title: "Cat Ipsum",
-                content:
-                  "<p>Dont wait for the storm to pass</p>"
-              },
-              {
-                id: 2,
-                title: "Hipster Ipsum",
-                content:
-                  "<p>Trust fund food truck drinking vinegar gochujang.</p>"
-              },
-              {
-                id: 3,
-                title: "Cupcake Ipsum",
-                content:
-                  "<p>Icing dessert soufflé lollipop chocolate bar sweet tart cake chupa chups. </p>"
-              }
-            ],
-            selectedPost: null
-          };
-        },
-        template: `
-  	<div class="posts-tab">
-      <ul class="posts-sidebar">
-        <li
-          v-for="post in posts"
-          v-bind:key="post.id"
-          v-bind:class="{ selected: post === selectedPost }"
-					v-on:click="selectedPost = post"
-        >
-          {{ post.title }}
-        </li>
-      </ul>
-      <div class="selected-post-container">
-      	<div 
-        	v-if="selectedPost"
-          class="selected-post"
-        >
-          <h3>{{ selectedPost.title }}</h3>
-          <div v-html="selectedPost.content"></div>
-        </div>
-        <strong v-else>
-          Click on a blog title to the left to view it.
-        </strong>
-      </div>
-    </div>
-  `
-      });
+<body>
+  <div id="app">
 
-      Vue.component("tab-archive", {
-        template: "<div>Archive component</div>"
-      });
+  </div>
 
-      new Vue({
-        el: "#dynamic-component-demo",
-        data: {
-          currentTab: "Posts",
-          tabs: ["Posts", "Archive"]
-        },
-        computed: {
-          currentTabComponent: function() {
-            return "tab-" + this.currentTab.toLowerCase();
-          }
-        }
-      });
-    </script>
-  </body>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        
+      },
+      template: `<span>11</span>`,
+      // render: function(creatElement){
+      //   return creatElement('p', 'This is element p not div')
+      // }
+    })
+  </script>
+</body>
+
 </html>
