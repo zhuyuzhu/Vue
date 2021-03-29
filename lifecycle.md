@@ -19,3 +19,26 @@
 #### created
 
 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，property 和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，`$el` property 目前尚不可用
+
+#### beforeMount
+
+在挂载开始之前被调用：相关的 `render` 函数首次被调用。
+
+**该钩子在服务器端渲染期间不被调用。** 
+
+#### mounted
+
+实例被挂载后调用，这时 `el` 被新创建的 `vm.$el` 替换了。如果根实例挂载到了一个文档内的元素上，当 `mounted` 被调用时 `vm.$el` 也在文档内。
+
+注意 `mounted` **不会**保证所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以在 `mounted` 内部使用 [vm.$nextTick](https://cn.vuejs.org/v2/api/#vm-nextTick)：
+
+```js
+mounted: function () {
+  this.$nextTick(function () {
+    // Code that will run only after the
+    // entire view has been rendered
+  })
+}
+```
+
+**该钩子在服务器端渲染期间不被调用。**

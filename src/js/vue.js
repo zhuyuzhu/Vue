@@ -1146,7 +1146,7 @@
   /**
    * Options with restrictions
    */
-  {
+  {//代码块写法
     strats.el = strats.propsData = function (parent, child, vm, key) {
       if (!vm) {
         warn(

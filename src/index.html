@@ -8,20 +8,34 @@
 
 <body>
   <div id="app">
-
+    <input type="text" v-focus>
   </div>
 
   <script>
+    // 注册一个全局自定义指令 `v-focus`
+    Vue.directive('focus', {
+      bind: function(el){
+        el.style.width = '200px'
+        console.log(el)
+      },
+      // 当被绑定的元素插入到 DOM 中时……
+      inserted: function (el) {
+        // 聚焦元素
+        el.focus()
+      }
+    })
     var vm = new Vue({
       el: '#app',
       data: {
-        
-      },
-      template: `<span>11</span>`,
-      // render: function(creatElement){
-      //   return creatElement('p', 'This is element p not div')
-      // }
+
+      }
     })
+
+    {
+      var a = 1;
+      a = a + 1;
+      console.log(a)
+    }
   </script>
 </body>
 
