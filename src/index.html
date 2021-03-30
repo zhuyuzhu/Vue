@@ -4,24 +4,50 @@
 <head>
   <title>Vue Component Blog Post Example</title>
   <script src="./js/vue.js"></script>
+  <script type="text/x-template" id="anchored-heading-template">
+    <h1 v-if="level === 1">
+      <slot></slot>
+    </h1>
+    <h2 v-else-if="level === 2">
+      <slot></slot>
+    </h2>
+    <h3 v-else-if="level === 3">
+      <slot></slot>
+    </h3>
+    <h4 v-else-if="level === 4">
+      <slot></slot>
+    </h4>
+    <h5 v-else-if="level === 5">
+      <slot></slot>
+    </h5>
+    <h6 v-else-if="level === 6">
+      <slot></slot>
+    </h6>
+  </script>
 </head>
 
 <body>
   <div id="app">
-    <input type="text" v-focus>
+    <anchored-heading elem="div">
+      <span>1111</span>
+      <span>2222</span>
+    </anchored-heading>
   </div>
 
   <script>
-    // 注册一个全局自定义指令 `v-focus`
-    Vue.directive('focus', {
-      bind: function(el){
-        el.style.width = '200px'
-        console.log(el)
+    Vue.component('anchored-heading', {
+      render: function (createElement) {//默认接收参数createElement，像事件处理函数的event或e
+        console.log(this.$slots.default);
+        return createElement(
+          this.elem, // 标签名称
+          this.$slots.default // 子节点数组
+        )
       },
-      // 当被绑定的元素插入到 DOM 中时……
-      inserted: function (el) {
-        // 聚焦元素
-        el.focus()
+      props: {
+        elem: {
+          type: String,
+          required: true
+        }
       }
     })
     var vm = new Vue({
@@ -30,12 +56,6 @@
 
       }
     })
-
-    {
-      var a = 1;
-      a = a + 1;
-      console.log(a)
-    }
   </script>
 </body>
 
