@@ -4,58 +4,35 @@
 <head>
   <title>Vue Component Blog Post Example</title>
   <script src="./js/vue.js"></script>
-  <script type="text/x-template" id="anchored-heading-template">
-    <h1 v-if="level === 1">
-      <slot></slot>
-    </h1>
-    <h2 v-else-if="level === 2">
-      <slot></slot>
-    </h2>
-    <h3 v-else-if="level === 3">
-      <slot></slot>
-    </h3>
-    <h4 v-else-if="level === 4">
-      <slot></slot>
-    </h4>
-    <h5 v-else-if="level === 5">
-      <slot></slot>
-    </h5>
-    <h6 v-else-if="level === 6">
-      <slot></slot>
-    </h6>
-  </script>
+  <script src="./js/vue-router.js"></script>
 </head>
 
 <body>
   <div id="app">
-    <anchored-heading elem="div">
-      <span>1111</span>
-      <span>2222</span>
-    </anchored-heading>
+    <p>
+      <router-link to="./user/foo">Go to Foo</router-link>
+      <router-link to="./user/bar">Go to Bar</router-link>
+      <router-link :to="{ name: 'user', params: { id: 123 }}">User</router-link>
+    </p>
+    <router-view></router-view>
   </div>
 
   <script>
-    Vue.component('anchored-heading', {
-      render: function (createElement) {//默认接收参数createElement，像事件处理函数的event或e
-        console.log(this.$slots.default);
-        return createElement(
-          this.elem, // 标签名称
-          this.$slots.default // 子节点数组
-        )
-      },
-      props: {
-        elem: {
-          type: String,
-          required: true
-        }
-      }
+    const User = {
+      template: '<div>User {{$route.params.id}}</div>'
+    }
+    const routes = [{
+      path: '/user/:id', //匹配路径user/动态值
+      name: 'user',
+      component: User
+    }]
+    const router = new VueRouter({
+      routes
     })
-    var vm = new Vue({
-      el: '#app',
-      data: {
 
-      }
-    })
+    const app = new Vue({
+      router
+    }).$mount('#app')
   </script>
 </body>
 
