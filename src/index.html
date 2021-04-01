@@ -10,8 +10,8 @@
 <body>
   <div id="app">
     <p>
-      <router-link to="./user/foo">Go to Foo</router-link>
-      <router-link to="./user/bar">Go to Bar</router-link>
+      <router-link to="/user/foo">Go to Foo</router-link>
+      <router-link to="/user/bar">Go to Bar</router-link>
       <router-link :to="{ name: 'user', params: { id: 123 }}">User</router-link>
     </p>
     <router-view></router-view>

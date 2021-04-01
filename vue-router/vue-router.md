@@ -44,7 +44,7 @@ npm run build
 
 #### 起步 Getting Started
 
-用 Vue.js + Vue Router 创建单页应用，通过Vue Router 将Vue组件 (components) 映射到路由 (routes)，这样Vue Router知道在哪里渲染这些组件。
+用 Vue.js + Vue Router 创建单页应用，**通过Vue Router 将Vue组件 (components) 映射到路由 (routes)**，这样Vue Router知道在哪里渲染这些组件。
 
 示例：
 
@@ -254,7 +254,7 @@ path: "/user/bar"
 query: {}
 ```
 
-
+**——可见：路由组件相比于组件添加了新的东西。比如动态路由参数可以传入到 组件中，以及路由组件中的watch方法内可以监听路由$route**
 
 或者使用导航卫士：
 
@@ -312,3 +312,13 @@ this.$route.params.pathMatch // 'admin'
 this.$router.push('/non-existing')
 this.$route.params.pathMatch // '/non-existing'
 ```
+
+
+
+history模式：
+
+history.pushState(state, title [, url])：https://developer.mozilla.org/zh-CN/docs/Web/API/History/pushState
+
+
+
+vue-router的其他文章：https://www.imooc.com/article/70052
