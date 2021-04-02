@@ -9,30 +9,31 @@
 
 <body>
   <div id="app">
-    <p>
-      <router-link to="/user/foo">Go to Foo</router-link>
-      <router-link to="/user/bar">Go to Bar</router-link>
-      <router-link :to="{ name: 'user', params: { id: 123 }}">User</router-link>
-    </p>
-    <router-view></router-view>
+    <demo-span></demo-span>
   </div>
 
   <script>
     const User = {
       template: '<div>User {{$route.params.id}}</div>'
     }
-    const routes = [{
-      path: '/user/:id', //匹配路径user/动态值
-      name: 'user',
-      component: User
-    }]
-    const router = new VueRouter({
-      routes
+
+    Vue.component('demo-span',{
+      data(){
+        return {
+          a: 1
+        }
+      },
+      watch:{
+        a(){
+          console.log(this.$root);
+        }
+      },
+      template: `<span>全局组件</span>`
+    })
+    const vm = new Vue({
+      el: "#app",
     })
 
-    const app = new Vue({
-      router
-    }).$mount('#app')
   </script>
 </body>
 
