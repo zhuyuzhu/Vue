@@ -1,6 +1,6 @@
 # vue instance （vue实例）
 
-vue实例上有什么，vue实例的属性和方法有什么用处？
+vue实例上有什么，vue实例的属性和方法有什么用处？——组件也是Vue实例。
 
 数据 property
 
@@ -16,7 +16,7 @@ https://cn.vuejs.org/v2/api/#%E5%AE%9E%E4%BE%8B-property
 
 ### 实例属性
 
-vm.$data
+$data
 
 Vue 实例观察的数据对象。Vue 实例代理了对其 data 对象 property 的访问。
 
@@ -64,7 +64,37 @@ new Vue({
 
 
 
+vm.$root
+
+vue状态管理使用vuex,如果项目不大，逻辑不多，name我们没必要用vuex给项目增加难度，只需要用$root设置vue实例的data就行了，
+
+在组件中，可以直接通过`this.$root`获取vm实例
+
+
+
+vm.$parent
+
+子组件通过$parent属性获取父组件实例，访问父组件的属性和方法
+
+`this.$parent`
+
+
+
 ### 实例方法
+
+地址：https://cn.vuejs.org/v2/api/#%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95-%E6%95%B0%E6%8D%AE
+
+vm.$watch( expOrFn, callback, [options] )
+
+
+
+vm.$set( target, propertyName/index, value )
+
+
+
+vm.$delete( target, propertyName/index )
+
+
 
 
 

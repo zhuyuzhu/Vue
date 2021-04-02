@@ -13,9 +13,6 @@
   </div>
 
   <script>
-    const User = {
-      template: '<div>User {{$route.params.id}}</div>'
-    }
 
     Vue.component('demo-span',{
       data(){
@@ -28,7 +25,12 @@
           console.log(this.$root);
         }
       },
-      template: `<span>全局组件</span>`
+      methods: {
+        btnClick(){
+          console.log(this.$options);
+        }
+      },
+      template: `<span v-on:click="btnClick">全局组件</span>`
     })
     const vm = new Vue({
       el: "#app",
